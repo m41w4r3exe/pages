@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>High Tables 120×70</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..900&family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:wght@400;600&display=swap">
+<style>
+/* Layout: one contact sheet per size band (closest to 120x70 first) under a sticky filter bar. */
+:root {
+  --bg: #f3f2ef;
+  --surface: #ffffff;
+  --ink: #1d1b18;
+  --muted: #5f5a52;
+  --line: #e0ddd6;
+  --photo: #e7e4de;
+  --accent: #7a4a1e;
+  --accent-soft: #f3e7da;
+  --free: #1b7548;
+  --free-soft: #dcf1e5;
+  --dealer: #855600;
+  --dealer-soft: #f5ead2;
+  --chip: #ebe8e2;
+  --new: #1d5c9e;
+  --new-soft: #dfeaf7;
+  --fav: #8b2635;
+  --fav-soft: #f6e3e5;
+  --font-display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --font-data: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #131210; --surface: #1c1a17; --ink: #ebe7e0; --muted: #a39d93; --line: #2f2c27; --photo: #26231f;
+    --accent: #e0a46c; --accent-soft: #3a2a1b; --free: #64d29e; --free-soft: #16321f;
+    --dealer: #e3b45e; --dealer-soft: #33280f; --chip: #2a2723; --new: #8cbcf0; --new-soft: #17283c;
+    --fav: #ef8f9a; --fav-soft: #3d1f24;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #131210; --surface: #1c1a17; --ink: #ebe7e0; --muted: #a39d93; --line: #2f2c27; --photo: #26231f;
+  --accent: #e0a46c; --accent-soft: #3a2a1b; --free: #64d29e; --free-soft: #16321f;
+  --dealer: #e3b45e; --dealer-soft: #33280f; --chip: #2a2723; --new: #8cbcf0; --new-soft: #17283c;
+  --fav: #ef8f9a; --fav-soft: #3d1f24;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font-body);
+  font-size: 16px; line-height: 1.45;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.wrap { max-width: 1240px; margin: 0 auto; padding-block: 28px 48px; display: grid; gap: 22px; }
+header { display: grid; gap: 10px; max-width: 920px; }
+.eyebrow { font-family: var(--font-data); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin: 0; }
+h1 {
+  font-family: var(--font-display); font-stretch: 78%; font-weight: 850; font-size: clamp(34px, 7vw, 54px);
+  line-height: .95; letter-spacing: -.01em; margin: 0; text-wrap: balance;
+}
+h1 em { font-style: normal; color: var(--accent); }
+.lede { margin: 0; color: var(--muted); max-width: 68ch; }
+.stats { display: flex; flex-wrap: wrap; gap: 6px 18px; margin: 0; padding: 0; list-style: none;
+  font-family: var(--font-data); font-size: 13px; font-variant-numeric: tabular-nums; }
+.stats li { color: var(--muted); }
+.stats b { font-weight: 500; color: var(--ink); }
+.guide {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1px;
+  background: var(--line); border: 1px solid var(--line); border-radius: 6px; overflow: hidden;
+}
+.guide div { background: var(--surface); padding: 10px 14px; display: grid; gap: 2px; }
+.guide .k { font-family: var(--font-data); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.guide .v { font-size: 15px; }
+.guide .v b { font-family: var(--font-data); font-weight: 500; }
+
+.controls { display: grid; gap: 10px; padding-block: 12px; background: var(--bg); border-bottom: 1px solid var(--line); z-index: 5; }
+@media (min-width: 720px) { .controls { position: sticky; top: env(safe-area-inset-top, 0px); } }
+.search { width: 100%; font: inherit; padding: 10px 12px; border-radius: 6px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); }
+.search:focus-visible, select:focus-visible, button:focus-visible, a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.bar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.group { display: flex; flex-wrap: wrap; gap: 6px; }
+.sep { width: 1px; height: 22px; background: var(--line); }
+.chip { font: inherit; font-size: 14px; padding: 5px 11px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; }
+.chip:hover { border-color: var(--muted); }
+.chip[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.selects { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.selects label { display: flex; gap: 6px; align-items: center; font-size: 14px; color: var(--muted); }
+select { font: inherit; font-size: 14px; padding: 5px 8px; border-radius: 6px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); max-width: 100%; }
+.count { margin-left: auto; font-family: var(--font-data); font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+
+section.band { display: grid; gap: 12px; }
+.band h2 { font-family: var(--font-display); font-stretch: 85%; font-weight: 750; font-size: 24px; line-height: 1.1; margin: 8px 0 0; }
+.band h2 .n { font-family: var(--font-data); font-weight: 400; font-size: 14px; color: var(--muted); margin-left: 6px; }
+.band p.sub { margin: -6px 0 0; color: var(--muted); font-size: 14px; max-width: 70ch; }
+.grid { list-style: none; margin: 0; padding: 0; display: grid; gap: 18px 16px; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); }
+.card { display: grid; grid-template-rows: auto 1fr; min-width: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+.card.fav { border-color: var(--fav); box-shadow: 0 0 0 1px var(--fav); }
+.ph { position: relative; display: block; aspect-ratio: 1 / 1; max-width: 100%; background: var(--photo); overflow: hidden; }
+.ph img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.ph .none { position: absolute; inset: 0; display: grid; place-items: center; font-family: var(--font-data); font-size: 12px; color: var(--muted); }
+.ph .flag { position: absolute; top: 8px; left: 8px; display: flex; flex-wrap: wrap; gap: 4px; }
+.ph .flag span { font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: 4px; }
+.flag .new { background: var(--new-soft); color: var(--new); }
+.flag .free { background: var(--free-soft); color: var(--free); }
+.flag .fav { background: var(--fav-soft); color: var(--fav); }
+.cb { display: grid; gap: 4px; align-content: start; padding: 10px 12px 12px; min-width: 0; }
+.pr { display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap; font-family: var(--font-data); font-variant-numeric: tabular-nums; }
+.price { font-weight: 500; font-size: 18px; }
+.price.free { color: var(--free); }
+.price.ask { color: var(--muted); font-size: 14px; font-weight: 400; }
+.vb { font-size: 12px; color: var(--muted); }
+.views { margin-left: auto; font-size: 12px; color: var(--muted); white-space: nowrap; }
+.size { font-family: var(--font-data); font-size: 14px; font-variant-numeric: tabular-nums; color: var(--ink); }
+.size .h { color: var(--accent); }
+.title {
+  font-family: var(--font-display); font-stretch: 92%; font-weight: 650; font-size: 15.5px; line-height: 1.25;
+  color: var(--ink); text-decoration: none; overflow-wrap: anywhere;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.title:hover { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+.meta { font-size: 13px; color: var(--muted); }
+.meta .pc { font-family: var(--font-data); font-size: 12px; }
+.note { margin: 2px 0 0; font-size: 13px; color: var(--ink); background: var(--accent-soft); border-radius: 4px; padding: 5px 8px; }
+.card.fav .note { background: var(--fav-soft); }
+.tags { display: flex; flex-wrap: wrap; gap: 4px; }
+.tag { font-size: 12px; padding: 1px 7px; border-radius: 4px; background: var(--chip); color: var(--ink); }
+.tag.dealer { background: var(--dealer-soft); color: var(--dealer); }
+.empty { padding: 40px 0; text-align: center; color: var(--muted); display: grid; gap: 10px; justify-items: center; }
+footer { font-size: 13px; color: var(--muted); max-width: 70ch; }
+@media (max-width: 480px) {
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 10px; }
+  .cb { padding: 8px 9px 10px; }
+  .price { font-size: 16px; }
+  .size { font-size: 12.5px; }
+  .title { font-size: 14.5px; }
+  .sep { display: none; }
+  .count { margin-left: 0; width: 100%; }
+}
+@media (prefers-reduced-motion: no-preference) { .chip, .title { transition: color .12s, background-color .12s, border-color .12s; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <p class="eyebrow">Kleinanzeigen · Berlin + 30 km · searched 10 Nov 2026</p>
+    <h1>High tables <em>around 120 × 70</em></h1>
+    <p class="lede">Every bar and counter-height table near 120 × 70 cm I found on Kleinanzeigen. The searches cover Bartisch, Hochtisch, Tresentisch, Stehtisch, Holztisch, Esstisch hoch, Kücheninsel and size terms such as “tisch 120x70” and “tisch hoch 105”. Each size comes from the full ad text, not the preview. Every table here was online on the search day.</p>
+    <ul class="stats" id="stats"></ul>
+    <div class="guide" aria-label="Height guide">
+      <div><span class="k">Counter height · 85–98 cm</span><span class="v">Stools with a seat of <b>60–68 cm</b></span></div>
+      <div><span class="k">Bar height · 99–120 cm</span><span class="v">Stools with a seat of <b>72–80 cm</b></span></div>
+    </div>
+  </header>
+
+  <section class="controls" aria-label="Filters">
+    <input class="search" id="q" type="search" placeholder="Search titles, e.g. Eiche, IKEA, Glas, massiv" autocomplete="off">
+    <div class="bar">
+      <div class="group" id="height" role="group" aria-label="Height">
+        <button class="chip" data-v="all" aria-pressed="true">Any height</button>
+        <button class="chip" data-v="bar" aria-pressed="false">Bar 99–120</button>
+        <button class="chip" data-v="counter" aria-pressed="false">Counter 85–98</button>
+      </div>
+      <span class="sep" aria-hidden="true"></span>
+      <div class="group" role="group" aria-label="Options">
+        <button class="chip" id="f-new" aria-pressed="false">New since 9 Nov</button>
+        <button class="chip" id="f-set" aria-pressed="false">With chairs or stools</button>
+        <button class="chip" id="f-nodealer" aria-pressed="false">Private sellers only</button>
+        <button class="chip" id="f-noisland" aria-pressed="false">Hide kitchen islands</button>
+      </div>
+    </div>
+    <div class="selects">
+      <label for="sort">Sort
+        <select id="sort">
+          <option value="fit">Closest to 120 × 70</option>
+          <option value="asc">Price, low to high</option>
+          <option value="views">Most viewed</option>
+          <option value="new">Newest first</option>
+        </select>
+      </label>
+      <label for="price">Price
+        <select id="price">
+          <option value="any">Any</option>
+          <option value="100">Up to €100</option>
+          <option value="200">Up to €200</option>
+        </select>
+      </label>
+      <span class="count" id="count"></span>
+    </div>
+  </section>
+
+  <div id="bands"></div>
+  <div class="empty" id="empty" hidden>
+    <span>No tables match these filters.</span>
+    <button class="chip" id="reset">Clear filters</button>
+  </div>
+
+  <footer>Sizes are length × depth × height in cm, taken from each ad's text. A price can cover the table only or a set with chairs, so read the ad. Views are the public visitor counter on Kleinanzeigen. Photos load from Kleinanzeigen, so a missing photo usually means the ad is gone.</footer>
+</div>
+
+<script>
+const D = [{"id": "2414007549", "t": "Bartisch weiß 120x60", "p": 120, "vb": true, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/2414007549", "pc": "14473", "a": "Potsdam", "km": 27, "L": 120, "W": 60, "H": 107, "v": 451, "n": false, "st": false, "dl": false, "im": "bc/bc5439e8-d3a1-4ce0-bb1f-bade64eb7fa1", "d": "2023-04-13", "g": "narrow", "note": null, "fav": false}, {"id": "3336098843", "t": "Stehtisch Bartisch Braun 2x vorhanden", "p": 69, "vb": true, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3336098843", "pc": "12101", "a": "Tempelhof", "km": 5, "L": 110, "W": 70, "H": 120, "v": 196, "n": false, "st": false, "dl": false, "im": "7e/7e1ead91-3417-4c48-a457-8e17e58694b1", "d": "2026-02-25", "g": "length", "note": null, "fav": false}, {"id": "3338203489", "t": "Stehtisch mit Schutzdecke", "p": 57, "vb": false, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3338203489", "pc": "12169", "a": "Steglitz", "km": 7, "L": 105, "W": 60, "H": 108, "v": 369, "n": false, "st": false, "dl": false, "im": "a5/a5804e3a-d356-4654-9dc6-91ea283630d6", "d": "2026-02-28", "g": "narrow", "note": null, "fav": false}, {"id": "3373526298", "t": "Ikea Bartisch Ekedalen Braun 120x80", "p": 60, "vb": false, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3373526298", "pc": "14482", "a": "Potsdam", "km": 23, "L": 120, "W": 80, "H": 105, "v": 127, "n": false, "st": false, "dl": false, "im": "d3/d3fe1acb-848d-4f1b-b199-94eb64e5a97f", "d": "2026-04-05", "g": "wide", "note": null, "fav": false}, {"id": "3388287663", "t": "Bartisch Stehtisch mit schmalem Metallfuß 120x60cm 105cm Hoch", "p": 45, "vb": false, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3388287663", "pc": "13089", "a": "Weissensee", "km": 7, "L": 120, "W": 60, "H": 105, "v": 273, "n": false, "st": false, "dl": false, "im": "d9/d94ba988-fa30-4c50-b4e2-e304f7b41e85", "d": "2026-04-21", "g": "narrow", "note": null, "fav": false}, {"id": "3397527130", "t": "IKEA Tisch, ähnlich Nordviken", "p": 40, "vb": false, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3397527130", "pc": "14621", "a": "Schönwalde-Glien", "km": 20, "L": 126, "W": 70, "H": 105, "v": 67, "n": false, "st": false, "dl": false, "im": "39/3992e6a0-8858-4601-a052-f56625fd2280", "d": "2026-05-02", "g": "close", "note": null, "fav": false}, {"id": "3420300012", "t": "Ikea Hochtisch mit 4 Klappstühlen weiß", "p": 80, "vb": true, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3420300012", "pc": "13125", "a": "Buch", "km": 16, "L": 130, "W": 70, "H": 105, "v": 121, "n": false, "st": true, "dl": false, "im": "44/44a1af5b-0597-4a3c-9ac8-7bcc15cdb29e", "d": "2026-05-28", "g": "close", "note": null, "fav": false}, {"id": "3440025723", "t": "Bartisch und Hocker", "p": 40, "vb": true, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3440025723", "pc": "12623", "a": "Mahlsdorf", "km": 16, "L": 120, "W": 60, "H": 105, "v": 60, "n": false, "st": true, "dl": false, "im": "04/044abf97-69d3-4fc8-9abb-6d2eadd480e8", "d": "2026-06-20", "g": "narrow", "note": null, "fav": false}, {"id": "3448117302", "t": "MADE x Boone Esstisch", "p": 110, "vb": false, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3448117302", "pc": "12159", "a": "Friedenau", "km": 5, "L": 120, "W": 60, "H": 90, "v": 90, "n": false, "st": false, "dl": false, "im": "f5/f5ab8209-8713-4a29-8eee-c071bfa74ca4", "d": "2026-07-01", "g": "narrow", "note": null, "fav": false}, {"id": "3452879085", "t": "Bartisch/Arbeitstisch, Tischplatte Holz 120x60, Gestell Edelstahl", "p": 85, "vb": false, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3452879085", "pc": "10243", "a": "Friedrichshain", "km": 4, "L": 120, "W": 60, "H": 90, "v": 201, "n": false, "st": true, "dl": false, "im": "5f/5fed03b2-2e33-495d-a132-1c11ac425818", "d": "2026-07-07", "g": "narrow", "note": null, "fav": false}, {"id": "3466898535", "t": "Stehtisch 120 x 80 x 110 cm mit Fichtenholz Platte und Metallgest", "p": 60, "vb": false, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3466898535", "pc": "12526", "a": "Treptow", "km": 18, "L": 120, "W": 80, "H": 110, "v": 112, "n": false, "st": false, "dl": true, "im": "de/de59f5d2-05be-4e6c-8cf2-efc2d1db4b62", "d": "2026-10-22", "g": "wide", "note": "Folding garden standing table, rust on the legs.", "fav": false}, {"id": "3498867191", "t": "Bartisch, Weiß, 57 x 117 cm", "p": 45, "vb": false, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3498867191", "pc": "13086", "a": "Weissensee", "km": 6, "L": 117, "W": 57, "H": 106, "v": 46, "n": false, "st": false, "dl": false, "im": "e3/e30e7d5e-28de-40ec-a814-acf8947d3d7d", "d": "2026-08-30", "g": "narrow", "note": null, "fav": false}, {"id": "3505311631", "t": "Ikea Bar-Tisch Tresen Tommaryd schwarz 130 x 70 w. neu", "p": 80, "vb": false, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3505311631", "pc": "12527", "a": "Köpenick", "km": 22, "L": 130, "W": 70, "H": 105, "v": 48, "n": false, "st": true, "dl": false, "im": "d5/d5900efa-a133-4318-adf0-f246c05e0612", "d": "2026-09-06", "g": "close", "note": null, "fav": false}, {"id": "3507576756", "t": "Tresentisch (Bartable)", "p": 18, "vb": false, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3507576756", "pc": "10587", "a": "Charlottenburg", "km": 4, "L": 110, "W": 60, "H": 92, "v": 14, "n": false, "st": false, "dl": false, "im": "93/93f62932-6a3c-44d3-9134-1675a21c4516", "d": "2026-09-09", "g": "narrow", "note": null, "fav": false}, {"id": "3515967963", "t": "Designer Vintage Massivholz Akazien Bartisch 120x65cm + Stühle", "p": 490, "vb": false, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3515967963", "pc": "10249", "a": "Friedrichshain", "km": 4, "L": 120, "W": 65, "H": 110, "v": 84, "n": false, "st": true, "dl": false, "im": "e8/e8cf1f31-8d48-4bba-abe3-febb0897ed94", "d": "2026-09-18", "g": "close", "note": null, "fav": false}, {"id": "3518668032", "t": "Großer Stehtisch / Hochtisch Bartisch Holz 120 × 60 cm", "p": 99, "vb": true, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3518668032", "pc": "12101", "a": "Tempelhof", "km": 5, "L": 120, "W": 60, "H": 112, "v": 88, "n": false, "st": false, "dl": false, "im": "72/7295d406-ef89-490d-9329-18871c9c9754", "d": "2026-09-20", "g": "narrow", "note": null, "fav": false}, {"id": "3520513557", "t": "Massiver Holztisch mit 4 Stühlen – Rahaus", "p": 150, "vb": true, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3520513557", "pc": "13407", "a": "Reinickendorf", "km": 7, "L": 120, "W": 70, "H": 100, "v": 290, "n": false, "st": true, "dl": false, "im": "22/22bcc3d2-f2ea-4133-b293-6a7c3d6e9010", "d": "2026-09-22", "g": "close", "note": "Your favourite. The line on the right is a board seam that has opened slightly, not a broken board. Ask for a close-up.", "fav": true}, {"id": "3520898016", "t": "Holz Hochtisch Bartisch Tresen Tisch Stehtisch", "p": 99, "vb": true, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3520898016", "pc": "12057", "a": "Neukölln", "km": 8, "L": 120, "W": 75, "H": 96, "v": 106, "n": false, "st": false, "dl": false, "im": "b1/b1b989ce-f1ec-477f-8633-261183a18ba1", "d": "2026-09-23", "g": "close", "note": null, "fav": false}, {"id": "3522487873", "t": "Bartisch / Stehtisch WOLFMÖBEL – Massivholz mit Stahlgestell", "p": 350, "vb": false, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3522487873", "pc": "13189", "a": "Pankow", "km": 6, "L": 120, "W": 56, "H": 107, "v": 142, "n": false, "st": false, "dl": false, "im": "8a/8a443140-7c6f-495d-89ef-5336f6691d15", "d": "2026-09-25", "g": "narrow", "note": null, "fav": false}, {"id": "3523413242", "t": "Hochtisch mit Stühlen", "p": 40, "vb": false, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3523413242", "pc": "12623", "a": "Hellersdorf", "km": 16, "L": 126, "W": 62, "H": 104, "v": 87, "n": false, "st": true, "dl": false, "im": "a2/a26b5eb2-1d03-4f28-a23e-18ef288c0bd9", "d": "2026-09-26", "g": "narrow", "note": null, "fav": false}, {"id": "3524043650", "t": "Ikea Stenstorp, Kücheninsel, Miniküche (Lieferung)", "p": 250, "vb": false, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3524043650", "pc": "15831", "a": "Mahlow", "km": 17, "L": 126, "W": 80, "H": 90, "v": 270, "n": false, "st": false, "dl": false, "im": "d6/d6efe5b3-1daf-469f-8da1-9f9914721e9f", "d": "2026-09-26", "g": "island", "note": null, "fav": false}, {"id": "3526776794", "t": "Ikea Nordviken Barhocker Tisch Stehtisch Einzelpreis", "p": 22, "vb": false, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3526776794", "pc": "12277", "a": "Tempelhof", "km": 12, "L": 120, "W": 64, "H": 110, "v": 302, "n": false, "st": true, "dl": true, "im": "ba/bacc60fc-bae5-4455-aa2a-00ce6c570eb6", "d": "2026-10-29", "g": "narrow", "note": null, "fav": false}, {"id": "3530761419", "t": "Moderner IKEA Bartisch Esstisch Küchentisch “Ekedalen“ in Weiß", "p": 160, "vb": true, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3530761419", "pc": "10407", "a": "Prenzlauer Berg", "km": 6, "L": 120, "W": 80, "H": 105, "v": 49, "n": false, "st": false, "dl": false, "im": "32/3252dfef-7f11-4d6e-ae2e-71eb7b06826b", "d": "2026-10-04", "g": "wide", "note": null, "fav": false}, {"id": "3531605054", "t": "Stehtisch Bartisch Industrial Design 109x60cm 1m hoch", "p": 60, "vb": true, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3531605054", "pc": "13189", "a": "Pankow", "km": 6, "L": 109, "W": 60, "H": 100, "v": 72, "n": false, "st": false, "dl": false, "im": "e1/e1cef350-66f7-468c-a29d-14d8b1128902", "d": "2026-10-04", "g": "narrow", "note": null, "fav": false}, {"id": "3531779746", "t": "Hochtisch + Stühle", "p": 125, "vb": true, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3531779746", "pc": "13587", "a": "Spandau", "km": 14, "L": 107, "W": 60, "H": 91, "v": 193, "n": false, "st": true, "dl": false, "im": "69/69b01394-8eb2-482c-8b4d-024446a07a4f", "d": "2026-11-05", "g": "narrow", "note": null, "fav": false}, {"id": "3532813125", "t": "Hochwertiger Bartisch/Esstisch in Granit-Optik, 100€", "p": 100, "vb": false, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3532813125", "pc": "12309", "a": "Tempelhof", "km": 14, "L": 120, "W": 65, "H": 105, "v": 54, "n": false, "st": false, "dl": false, "im": "2c/2cd6b381-c598-4c47-b1f9-742417b44767", "d": "2026-10-06", "g": "close", "note": null, "fav": false}, {"id": "3533208280", "t": "Vintage Hochtisch mit Hochstühlen", "p": 60, "vb": false, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3533208280", "pc": "16761", "a": "Hennigsdorf", "km": 18, "L": 117, "W": 60, "H": 110, "v": 100, "n": false, "st": true, "dl": false, "im": "84/848d83eb-a32f-4538-be18-2dc51797a0b0", "d": "2026-10-06", "g": "narrow", "note": null, "fav": false}, {"id": "3533549801", "t": "Industrial Look Stehtisch mit 2 Barhockern, Essgruppe", "p": 50, "vb": true, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3533549801", "pc": "12045", "a": "Neukölln", "km": 5, "L": 120, "W": 60, "H": 90, "v": 93, "n": false, "st": true, "dl": false, "im": "45/456109ca-8058-4e50-8d42-8e10b980867a", "d": "2026-10-07", "g": "narrow", "note": null, "fav": false}, {"id": "3537637114", "t": "Vasagle Tisch mit 4 Hocker", "p": 150, "vb": true, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3537637114", "pc": "13355", "a": "Gesundbrunnen", "km": 3, "L": 120, "W": 60, "H": 90, "v": 40, "n": false, "st": true, "dl": false, "im": "44/4447ba56-9174-4dfc-a032-07211c149467", "d": "2026-10-11", "g": "narrow", "note": null, "fav": false}, {"id": "3539042964", "t": "Ikea Hochtisch mit Barhockern", "p": 60, "vb": true, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3539042964", "pc": "10117", "a": "Mitte", "km": null, "L": 130, "W": 70, "H": 105, "v": 201, "n": false, "st": true, "dl": false, "im": "e7/e70c92f3-6d14-4f1e-b0f6-e5eb738cf367", "d": "2026-10-12", "g": "close", "note": "Height not stated; IKEA 130×70 bar tables are 105 cm.", "fav": false}, {"id": "3539435508", "t": "Bartisch/ Bartresen", "p": 50, "vb": true, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3539435508", "pc": "12685", "a": "Marzahn", "km": 13, "L": 120, "W": 60, "H": 106, "v": 100, "n": false, "st": false, "dl": false, "im": "47/47921440-7e27-42e8-a604-364ceb188f35", "d": "2026-10-12", "g": "narrow", "note": null, "fav": false}, {"id": "3542601376", "t": "Ikea Stornäs Bartisch Massivholz dunkel schwarz braun", "p": 20, "vb": false, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3542601376", "pc": "16356", "a": "Werneuchen", "km": 23, "L": 127, "W": 70, "H": 105, "v": 46, "n": false, "st": false, "dl": false, "im": "64/645a03a2-e1fb-46e6-8cff-e71532d87332", "d": "2026-10-16", "g": "close", "note": null, "fav": false}, {"id": "3543173979", "t": "Ikea Ekedalen Bartisch mit 4 Barstühlen schwarzbraun", "p": 80, "vb": true, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3543173979", "pc": "16356", "a": "Ahrensfelde", "km": 18, "L": 120, "W": 80, "H": 105, "v": 217, "n": false, "st": true, "dl": false, "im": "2d/2d59d4dd-9bbf-4da9-a14c-204bf7dae966", "d": "2026-10-20", "g": "wide", "note": null, "fav": false}, {"id": "3543778607", "t": "Ikea EKEDALEN Bartisch, weiß, 120x80x105 cm", "p": 130, "vb": false, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3543778607", "pc": "12487", "a": "Treptow", "km": 13, "L": 120, "W": 80, "H": 105, "v": 27, "n": false, "st": false, "dl": false, "im": "7b/7b21a1cc-eb20-4f04-8cf3-d4d471dd497a", "d": "2026-10-17", "g": "wide", "note": null, "fav": false}, {"id": "3544556420", "t": "Massiver Hochtisch aus Eiche mit 2 Stühlen", "p": 99, "vb": false, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3544556420", "pc": "16548", "a": "Glienicke/Nordbahn", "km": 13, "L": 115, "W": 70, "H": 95, "v": 120, "n": false, "st": true, "dl": false, "im": "a0/a0c6c50e-e24b-48cc-a9d0-83c890c68831", "d": "2026-10-18", "g": "close", "note": null, "fav": false}, {"id": "3544642416", "t": "Bartisch mit Hockern Rustikal Vintage Bauernhausstil", "p": 250, "vb": true, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3544642416", "pc": "10961", "a": "Kreuzberg", "km": 3, "L": 129, "W": 81, "H": 106, "v": 266, "n": false, "st": true, "dl": false, "im": "b8/b830cb55-4076-41d8-9109-a02d64b6aa2f", "d": "2026-10-18", "g": "wide", "note": null, "fav": false}, {"id": "3545746637", "t": "Kücheninsel (IKEA - TORNVIKEN)", "p": 100, "vb": false, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3545746637", "pc": "13055", "a": "Hohenschönhausen", "km": 9, "L": 126, "W": 77, "H": 90, "v": 321, "n": false, "st": false, "dl": false, "im": "32/3254489d-873d-4752-8b4b-0c1ef653a9cf", "d": "2026-10-19", "g": "island", "note": null, "fav": false}, {"id": "3546813724", "t": "Bar-Tisch mit 4 Stühlen", "p": 150, "vb": false, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3546813724", "pc": "14624", "a": "Dallgow", "km": 21, "L": 115, "W": 70, "H": 95, "v": 134, "n": false, "st": true, "dl": false, "im": "a4/a48f49b6-3e81-4d3a-93aa-7dea43e1967d", "d": "2026-10-20", "g": "close", "note": null, "fav": false}, {"id": "3547332939", "t": "agerby Hochtisch Bartisch Tisch Glas Eiche 70x120", "p": 150, "vb": true, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3547332939", "pc": "12279", "a": "Marienfelde", "km": 12, "L": 120, "W": 70, "H": 105, "v": 68, "n": false, "st": false, "dl": false, "im": "a2/a23432e2-0851-4edb-afe7-96294b3eb87e", "d": "2026-10-21", "g": "close", "note": null, "fav": false}, {"id": "3550460366", "t": "Ikea Tisch Tommaryd Weiß", "p": 80, "vb": true, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3550460366", "pc": "14059", "a": "Charlottenburg", "km": 6, "L": 130, "W": 70, "H": 105, "v": 26, "n": false, "st": false, "dl": false, "im": "76/764bf306-fac4-4a84-bb61-2e1d6fc69961", "d": "2026-10-24", "g": "close", "note": null, "fav": false}, {"id": "3550832510", "t": "Thresen / Bartisch echter Hingucker Hochglanz", "p": 45, "vb": true, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3550832510", "pc": "13595", "a": "Spandau", "km": 13, "L": 120, "W": 60, "H": 106, "v": 46, "n": false, "st": false, "dl": false, "im": "58/587d3749-b827-428b-a18d-1bd8f23e9fc6", "d": "2026-10-24", "g": "narrow", "note": null, "fav": false}, {"id": "3551184006", "t": "Boatwood by WMK I Schöner & robuster 130x60 Stehtisch handgefertigt aus altem Bootsholz I Teakholz massiv I Outdoor geeignet I Tisch Küchentisch Esstisch Holztisch Bartisch Gastro I Berlin Bremen Köln", "p": 585, "vb": false, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3551184006", "pc": "10245", "a": "Friedrichshain", "km": 5, "L": 130, "W": 60, "H": null, "v": 52, "n": false, "st": false, "dl": true, "im": "f9/f9b9358e-7f0f-4562-80cb-adbe11b89d54", "d": "2026-10-25", "g": "narrow", "note": null, "fav": false}, {"id": "3554922064", "t": "Bartisch Gruppe Höffner quadrato Akazie, Esstisch Barhocker", "p": 249, "vb": true, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3554922064", "pc": "15370", "a": "Fredersdorf-Vogelsdorf", "km": 25, "L": 120, "W": 75, "H": 96, "v": 88, "n": false, "st": true, "dl": false, "im": "1f/1fdfd5d4-2a7b-4530-9e09-c47ac4813331", "d": "2026-10-28", "g": "close", "note": null, "fav": false}, {"id": "3555443999", "t": "Hochwertiger Bartisch", "p": 30, "vb": true, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3555443999", "pc": "10557", "a": "Tiergarten", "km": 1, "L": 120, "W": 60, "H": 107, "v": 80, "n": false, "st": false, "dl": false, "im": "85/85558cd5-3540-440b-a281-79eb7786340a", "d": "2026-10-29", "g": "narrow", "note": null, "fav": false}, {"id": "3555455653", "t": "Bartisch Hochtisch mit zwei Barhockern", "p": 100, "vb": false, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3555455653", "pc": "13437", "a": "Reinickendorf", "km": 9, "L": 117, "W": 56, "H": 105, "v": 122, "n": false, "st": true, "dl": false, "im": "54/54d610a2-bdc3-4706-bc02-de08af0f1d66", "d": "2026-10-29", "g": "narrow", "note": null, "fav": false}, {"id": "3556576220", "t": "IKEA Ekedalen Tisch Bartisch hoch", "p": 100, "vb": false, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3556576220", "pc": "13591", "a": "Spandau", "km": 16, "L": 120, "W": 80, "H": 105, "v": 50, "n": false, "st": true, "dl": false, "im": "33/33fbdcd8-d400-4f06-9945-f67299a141a8", "d": "2026-10-30", "g": "wide", "note": null, "fav": false}, {"id": "3557057530", "t": "Bartisch inkl. maßgefertigter Glasplatte", "p": 65, "vb": false, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3557057530", "pc": "10709", "a": "Wilmersdorf", "km": 6, "L": 117, "W": 57, "H": 104, "v": 81, "n": false, "st": true, "dl": false, "im": "2c/2c589538-c584-4893-9e48-3aff04b833c0", "d": "2026-10-31", "g": "narrow", "note": null, "fav": false}, {"id": "3558264495", "t": "IKEA EKEDALEN Bartisch / Stehtisch dunkelbraun", "p": 100, "vb": true, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3558264495", "pc": "14197", "a": "Wilmersdorf", "km": 6, "L": 120, "W": 80, "H": 105, "v": 39, "n": false, "st": false, "dl": false, "im": "78/78da8368-0abd-41db-b122-1bc0d7fadc1c", "d": "2026-11-01", "g": "wide", "note": null, "fav": false}, {"id": "3558819921", "t": "IKEA TORNVIKEN Kücheninsel | TORNVIKEN Kitchen Island", "p": 140, "vb": false, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3558819921", "pc": "15711", "a": "Königs Wusterhausen", "km": 30, "L": 126, "W": 77, "H": 90, "v": 92, "n": false, "st": false, "dl": false, "im": "0f/0f40011d-d5a9-4765-be76-058dd4efdc88", "d": "2026-11-01", "g": "island", "note": null, "fav": false}, {"id": "3559265579", "t": "IKEA TORNVIKEN Kücheninsel – cremeweiß/Eiche – sehr guter Zustand", "p": 225, "vb": false, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3559265579", "pc": "12489", "a": "Treptow", "km": 14, "L": 126, "W": 77, "H": 90, "v": 176, "n": false, "st": false, "dl": false, "im": "f0/f010d04e-b58e-4f4d-b3b8-edd56b6cd541", "d": "2026-11-01", "g": "island", "note": null, "fav": false}, {"id": "3561364625", "t": "Stehtisch und 4 Stühle", "p": 130, "vb": false, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3561364625", "pc": "14612", "a": "Falkensee", "km": 21, "L": 125, "W": 70, "H": 106, "v": 39, "n": false, "st": true, "dl": false, "im": "c6/c66c7600-661f-4f16-902e-efbce5dbcbd5", "d": "2026-11-08", "g": "close", "note": null, "fav": false}, {"id": "3561903162", "t": "Weißer Bartisch 1,20m x 60cm mit 4 schwarzen Barhockern", "p": 200, "vb": true, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3561903162", "pc": "13595", "a": "Spandau", "km": 13, "L": 120, "W": 60, "H": null, "v": 18, "n": false, "st": true, "dl": false, "im": "e2/e2876cf5-c6e5-463d-a6d9-f2bfd5d2a1e9", "d": "2026-11-04", "g": "narrow", "note": null, "fav": false}, {"id": "3562942070", "t": "Moderner BARTISCH Weiß/Anthrazit", "p": 75, "vb": true, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3562942070", "pc": "13088", "a": "Weissensee", "km": 8, "L": 117, "W": 57, "H": 106, "v": 59, "n": false, "st": false, "dl": false, "im": "3b/3b032aa0-57ab-4a2c-b592-6af5164f81ec", "d": "2026-11-06", "g": "narrow", "note": null, "fav": false}, {"id": "3563252907", "t": "Stabiler Metall Bartisch 120x60x105", "p": 40, "vb": true, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3563252907", "pc": "13469", "a": "Reinickendorf", "km": 11, "L": 120, "W": 60, "H": 105, "v": 26, "n": false, "st": false, "dl": false, "im": "a9/a9049d78-7ba3-48c7-a144-2817d08ce43e", "d": "2026-11-06", "g": "narrow", "note": null, "fav": false}, {"id": "3563527040", "t": "Tischgruppe, Sitzecke", "p": 18, "vb": true, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3563527040", "pc": "16356", "a": "Werneuchen", "km": 23, "L": 105, "W": 60, "H": 90, "v": 44, "n": false, "st": true, "dl": false, "im": "80/808ec118-ecc4-43f2-b792-c535326605e8", "d": "2026-11-06", "g": "narrow", "note": null, "fav": false}, {"id": "3563829314", "t": "Moderne Essecke mit Bartisch und 4 Barhockern", "p": 190, "vb": false, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3563829314", "pc": "13125", "a": "Pankow", "km": 15, "L": 128, "W": 71, "H": 106, "v": 94, "n": false, "st": true, "dl": false, "im": "4e/4e9aa8af-7c7c-46fe-9b7b-2494bfb63a30", "d": "2026-11-07", "g": "close", "note": null, "fav": false}, {"id": "3563860392", "t": "Bartisch Set mit 2 Barhockern helle Holzoptik", "p": 25, "vb": false, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3563860392", "pc": "12309", "a": "Tempelhof", "km": 14, "L": 110, "W": 60, "H": 92, "v": 33, "n": false, "st": true, "dl": false, "im": "03/038d5ca6-a95f-4b8a-ae55-499a95801051", "d": "2026-11-07", "g": "narrow", "note": null, "fav": false}, {"id": "3563878277", "t": "Gestell Kücheninsel / Bartisch IKEA VADHOLMA schwarz, ohne Platte", "p": 110, "vb": true, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3563878277", "pc": "10967", "a": "Kreuzberg", "km": 4, "L": 126, "W": 79, "H": 90, "v": 51, "n": false, "st": false, "dl": false, "im": "50/50266d7d-f265-46b2-853a-3c041c7bf6c3", "d": "2026-11-07", "g": "island", "note": "Frame only, no top.", "fav": false}, {"id": "3564299589", "t": "Esstischgruppe", "p": null, "vb": false, "free": true, "u": "https://www.kleinanzeigen.de/s-anzeige/3564299589", "pc": "12587", "a": "Köpenick", "km": 19, "L": 110, "W": 70, "H": 105, "v": 21, "n": false, "st": true, "dl": false, "im": "e9/e92e83c2-b029-4fe4-8916-ea7b5ec02538", "d": "2026-11-07", "g": "length", "note": null, "fav": false}, {"id": "3564361826", "t": "Design-Bartisch nach Maß, Massivholz & Stahl – 120x60x104", "p": 300, "vb": true, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3564361826", "pc": "10317", "a": "Treptow", "km": 8, "L": 120, "W": 60, "H": 104, "v": 31, "n": false, "st": false, "dl": false, "im": "be/beb24c86-710d-4a67-b13a-6bbe946acf24", "d": "2026-11-07", "g": "narrow", "note": null, "fav": false}, {"id": "3565050078", "t": "Ikea Nordviken Tisch Küchentisch Hoch Bartisch Stehtisch Tresen", "p": 100, "vb": true, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3565050078", "pc": "10559", "a": "Tiergarten", "km": 2, "L": 126, "W": 70, "H": 105, "v": 35, "n": false, "st": true, "dl": false, "im": "72/72479f56-aaae-4668-a7ca-744a25dc8ee3", "d": "2026-11-08", "g": "close", "note": null, "fav": false}, {"id": "3565134762", "t": "Bartisch Eichefarben/Natur", "p": 90, "vb": true, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3565134762", "pc": "13055", "a": "Hohenschönhausen", "km": 9, "L": 115, "W": 60, "H": 108, "v": 40, "n": false, "st": false, "dl": false, "im": "83/833bb57a-c037-4360-90c6-3848561a1714", "d": "2026-11-08", "g": "narrow", "note": null, "fav": false}, {"id": "3565493830", "t": "Ikea Kücheninsel, anthrazit/Eiche, 126x77x90 (Höhe) cm /TORNVIKEN", "p": 250, "vb": true, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3565493830", "pc": "10115", "a": "Mitte", "km": 2, "L": 126, "W": 77, "H": 90, "v": 83, "n": false, "st": true, "dl": false, "im": "73/7341990e-5b97-4ad0-96eb-423688d067f3", "d": "2026-11-08", "g": "island", "note": null, "fav": false}, {"id": "3565679502", "t": "Bartisch Stehtisch Küche Eiche Natur Schwarz 71x128cm TOP Zustand", "p": 180, "vb": false, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3565679502", "pc": "10247", "a": "Friedrichshain", "km": 6, "L": 128, "W": 71, "H": 105, "v": 18, "n": false, "st": true, "dl": false, "im": "7a/7af02d87-cf63-4310-82b4-7cb0a1a2906b", "d": "2026-11-08", "g": "close", "note": null, "fav": false}, {"id": "3565941405", "t": "Bartisch SANDBY (71x128) mit 4 Stühlen des Modells PEBRINGE", "p": 350, "vb": true, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3565941405", "pc": "10369", "a": "Lichtenberg", "km": 6, "L": 128, "W": 71, "H": 105, "v": 46, "n": false, "st": true, "dl": false, "im": "13/13c2d98f-fa97-42e8-bb5c-71c9e6d0e140", "d": "2026-11-08", "g": "close", "note": null, "fav": false}, {"id": "3565965938", "t": "Bar Table with Shelf (110x60x100)", "p": 50, "vb": true, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3565965938", "pc": "10369", "a": "Lichtenberg", "km": 6, "L": 110, "W": 60, "H": 100, "v": 43, "n": false, "st": false, "dl": false, "im": "d3/d3710bf2-f2df-4439-80ca-8ce79a532fa1", "d": "2026-11-08", "g": "narrow", "note": null, "fav": false}, {"id": "3566801216", "t": "Bartisch 120x80cm", "p": 200, "vb": false, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3566801216", "pc": "15370", "a": "Fredersdorf-Vogelsdorf", "km": 25, "L": 120, "W": 80, "H": null, "v": 14, "n": true, "st": true, "dl": false, "im": "36/3614aaed-ae6c-49e0-970e-0f8a803a7bfd", "d": "2026-11-09", "g": "wide", "note": null, "fav": false}, {"id": "3566821667", "t": "Hochtisch mit vier passenden Barhockern", "p": null, "vb": true, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3566821667", "pc": "10243", "a": "Friedrichshain", "km": 4, "L": 120, "W": 70, "H": 95, "v": 47, "n": true, "st": true, "dl": false, "im": "fd/fdc9baf8-34bf-49a2-841d-6fc2937e8d71", "d": "2026-11-09", "g": "close", "note": null, "fav": false}, {"id": "3567485838", "t": "IKEA Kücheninsel TORNVIKEN mit Stühle", "p": 200, "vb": true, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3567485838", "pc": "13507", "a": "Reinickendorf", "km": 10, "L": 126, "W": 77, "H": 90, "v": 46, "n": true, "st": true, "dl": false, "im": "10/104f5f33-53f5-452b-96fb-2f7f81e7d24f", "d": "2026-11-10", "g": "island", "note": null, "fav": false}, {"id": "3387606855", "t": "Hochtisch + 3 Barhocker / Hochstühle – sehr guter Zustand", "p": 100, "vb": false, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3387606855", "pc": "15366", "a": "Neuenhagen", "km": 22, "L": 110, "W": 80, "H": 100, "v": 110, "n": false, "st": true, "dl": false, "im": "f5/f56616be-f39b-4584-86d1-869bffdadd64", "d": "2026-04-20", "g": "wide", "note": null, "fav": false}, {"id": "3489622097", "t": "Tresen Bar Hochtisch Stehtisch mit Barhocker MAGIS Bureaurama", "p": null, "vb": true, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3489622097", "pc": "13509", "a": "Reinickendorf", "km": 9, "L": 126, "W": 73, "H": 101, "v": 257, "n": false, "st": true, "dl": true, "im": "32/32949699-27c0-48f4-92da-7a82ce9611a4", "d": "2026-10-19", "g": "close", "note": "listed twice", "fav": false}, {"id": "3507460000", "t": "★ Bartisch Tisch Esstisch Anlieferung möglich t1 ★", "p": 25, "vb": true, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3507460000", "pc": "14513", "a": "Teltow", "km": 16, "L": 110, "W": 70, "H": 98, "v": 270, "n": false, "st": true, "dl": true, "im": "c2/c26077ed-82a9-4efb-9ac2-d701f8755a6b", "d": "2026-11-07", "g": "length", "note": "listed twice", "fav": false}, {"id": "3516830531", "t": "Massivholz Esstisch und Hocker", "p": 90, "vb": true, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3516830531", "pc": "13088", "a": "Weissensee", "km": 8, "L": 109, "W": 69, "H": 100, "v": 46, "n": false, "st": true, "dl": false, "im": "c7/c7a8e71f-55b3-4204-87a0-975fd35efd97", "d": "2026-09-19", "g": "length", "note": null, "fav": false}, {"id": "3517644835", "t": "Weißer Hochtisch mit Stühlen, Chromgestell", "p": 60, "vb": false, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3517644835", "pc": "14478", "a": "Potsdam", "km": 25, "L": 120, "W": 60, "H": null, "v": 200, "n": false, "st": true, "dl": false, "im": "ca/ca4a74d0-b3ef-49fb-9da0-dc00559a2337", "d": "2026-09-20", "g": "narrow", "note": null, "fav": false}, {"id": "3522179304", "t": "Bartisch + Hocker", "p": 130, "vb": true, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3522179304", "pc": "15711", "a": "Königs Wusterhausen", "km": 30, "L": 120, "W": 60, "H": 100, "v": 70, "n": false, "st": true, "dl": false, "im": "15/15942699-8b53-481a-a99b-8e7581d057ab", "d": "2026-09-24", "g": "narrow", "note": null, "fav": false}, {"id": "3529669552", "t": "Moderne Bartisch-Sitzgruppe POCO Klara + 2 Barhocker (o. Deko)", "p": 59, "vb": true, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3529669552", "pc": "12489", "a": "Köpenick", "km": 14, "L": 120, "W": 60, "H": 103, "v": 194, "n": false, "st": true, "dl": false, "im": "39/397e72b1-1b33-4e87-9d16-fd9a0232a4cc", "d": "2026-10-03", "g": "narrow", "note": null, "fav": false}, {"id": "3531810154", "t": "Bartisch mit 2 Barstühlen – sehr gut erhalten", "p": 250, "vb": false, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3531810154", "pc": "15831", "a": "Blankenfelde-Mahlow", "km": 18, "L": 120, "W": 55, "H": 110, "v": 70, "n": false, "st": true, "dl": false, "im": "8c/8c137cff-5cd1-4407-9f62-bdbdf9cb8d62", "d": "2026-10-05", "g": "narrow", "note": null, "fav": false}, {"id": "3534618706", "t": "2-teiliges Bartisch Set, Abholung in 12109 Berlin", "p": 40, "vb": true, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3534618706", "pc": "10117", "a": "Mitte", "km": null, "L": 120, "W": 60, "H": 105, "v": 60, "n": false, "st": true, "dl": false, "im": "d7/d7adc58e-4e3f-4cc8-8fec-75256f478bf4", "d": "2026-10-08", "g": "narrow", "note": null, "fav": false}, {"id": "3535347582", "t": "JYSK massivholz Bartisch mit 4 Barhockern Eiche massiv", "p": 150, "vb": true, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3535347582", "pc": "13086", "a": "Weissensee", "km": 6, "L": 115, "W": 70, "H": 95, "v": 120, "n": false, "st": true, "dl": false, "im": "bd/bdb7dab8-ac8f-4945-bea0-ecd7a66a529d", "d": "2026-10-09", "g": "close", "note": "listed twice", "fav": false}, {"id": "3536024011", "t": "Küchentresen / Kücheninsel", "p": 150, "vb": true, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3536024011", "pc": "12167", "a": "Steglitz", "km": 8, "L": 126, "W": 79, "H": 90, "v": 539, "n": false, "st": true, "dl": false, "im": "c0/c0d67b3a-3ddb-4da2-90ae-e57e11d6740d", "d": "2026-10-09", "g": "island", "note": null, "fav": false}, {"id": "3536295516", "t": "Hoher Esstisch Tisch + 4 Barhocker Barstuhl Küche Küchentisch Bar", "p": 150, "vb": true, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3536295516", "pc": "10559", "a": "Tiergarten", "km": 3, "L": 126, "W": 70, "H": 105, "v": 78, "n": false, "st": true, "dl": false, "im": "f1/f14931d1-db84-4de7-b35c-f4aeb354c561", "d": "2026-10-10", "g": "close", "note": "also listed at €160 VB", "fav": false}, {"id": "3537922160", "t": "Rustikaler Bartisch im industrialisierten-Style", "p": 80, "vb": false, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3537922160", "pc": "16515", "a": "Oranienburg", "km": 28, "L": 120, "W": 60, "H": 90, "v": 30, "n": false, "st": true, "dl": false, "im": "6d/6d3656b5-cb2e-4b7b-8203-0cde329a0833", "d": "2026-10-11", "g": "narrow", "note": "listed twice", "fav": false}, {"id": "3540797060", "t": "Bartisch Küchenbartisch", "p": 20, "vb": true, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3540797060", "pc": "13591", "a": "Spandau", "km": 16, "L": 112, "W": 57, "H": 106, "v": 127, "n": false, "st": true, "dl": false, "im": "22/228ad96a-a78e-4c90-96f6-3eb2663f2a18", "d": "2026-10-14", "g": "narrow", "note": null, "fav": false}, {"id": "3541440642", "t": "IKEA TORNVIKEN Kücheninsel mit 2 Stühlen – Sehr guter Zustand", "p": 450, "vb": false, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3541440642", "pc": "13629", "a": "Spandau", "km": 8, "L": 126, "W": 77, "H": 90, "v": 201, "n": false, "st": true, "dl": false, "im": "12/122d0ef8-7962-4874-8235-1dbe0a7bbac8", "d": "2026-10-15", "g": "island", "note": null, "fav": false}, {"id": "3543968233", "t": "Moderner Bartisch in Eichenoptik", "p": 100, "vb": false, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3543968233", "pc": "12049", "a": "Neukölln", "km": 5, "L": 105, "W": 80, "H": 105, "v": 41, "n": false, "st": false, "dl": false, "im": "51/510d4726-356d-4d6a-a780-bd96771afcd7", "d": "2026-10-17", "g": "wide", "note": null, "fav": false}, {"id": "3544459790", "t": "Moderner Bartisch mit 4 Barhockern – Weiß Hochglanz", "p": 110, "vb": true, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3544459790", "pc": "10715", "a": "Wilmersdorf", "km": 5, "L": 120, "W": 60, "H": 100, "v": 127, "n": false, "st": true, "dl": false, "im": "7b/7bb9bdbf-b170-43a2-ad33-7af76ea38882", "d": "2026-10-18", "g": "narrow", "note": null, "fav": false}, {"id": "3551140190", "t": "Kücheninsel/Bartisch mit zwei Barhockern und Stauraum MIT AUFZUG", "p": 160, "vb": false, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3551140190", "pc": "12051", "a": "Neukölln", "km": 7, "L": 125, "W": 80, "H": 100, "v": 277, "n": false, "st": true, "dl": false, "im": "43/438f4187-4408-40ab-8b69-7f6e543f869f", "d": "2026-10-25", "g": "island", "note": null, "fav": false}, {"id": "3552928243", "t": "IKEA VADHOLMA Kücheninsel mit Gestell / Rack + 2 Barhocker", "p": 430, "vb": false, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3552928243", "pc": "10551", "a": "Tiergarten", "km": 3, "L": 126, "W": 79, "H": 90, "v": 272, "n": false, "st": true, "dl": false, "im": "59/593efc7e-83b4-4009-a762-41c6ac1a1282", "d": "2026-10-26", "g": "island", "note": null, "fav": false}, {"id": "3556558175", "t": "weiße Bartisch-Essgruppe aus massivem Kiefernholz mit 2 Stühlen", "p": 180, "vb": true, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3556558175", "pc": "12247", "a": "Steglitz", "km": 9, "L": 108, "W": 60, "H": 91, "v": 129, "n": false, "st": true, "dl": false, "im": "9b/9b1e873a-a310-4595-9750-adee7541bad5", "d": "2026-10-30", "g": "narrow", "note": null, "fav": false}, {"id": "3557041649", "t": "IKEA Bartisch inklusive Stühle/ Esstisch", "p": 120, "vb": false, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3557041649", "pc": "13127", "a": "Pankow", "km": 11, "L": 120, "W": 80, "H": 106, "v": 82, "n": false, "st": true, "dl": false, "im": "64/64da29a1-f2dd-46ec-a204-6f8eb7024c38", "d": "2026-10-31", "g": "wide", "note": null, "fav": false}, {"id": "3564225864", "t": "Ikea Stornäs Bartisch", "p": 60, "vb": true, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3564225864", "pc": "13189", "a": "Pankow", "km": 6, "L": 128, "W": 70, "H": 105, "v": 47, "n": false, "st": false, "dl": false, "im": "a2/a29283e0-a16f-4c2d-a784-8fa4aa6b93d3", "d": "2026-11-07", "g": "close", "note": null, "fav": false}, {"id": "3565437372", "t": "Bartisch \"Sandby\" und 4 Barstühle \"Clipop\" Tisch 4 Stühle", "p": 280, "vb": false, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3565437372", "pc": "13057", "a": "Hohenschönhausen", "km": 13, "L": 128, "W": 71, "H": 105, "v": 64, "n": false, "st": true, "dl": false, "im": "17/1710911a-d54c-456d-a126-cad9a77aea14", "d": "2026-11-08", "g": "close", "note": null, "fav": false}, {"id": "3565507367", "t": "HOMCOM Bartisch-Set mit 2 Barhockern", "p": 85, "vb": true, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3565507367", "pc": "10405", "a": "Prenzlauer Berg", "km": 4, "L": 108, "W": 60, "H": 95, "v": 41, "n": false, "st": true, "dl": false, "im": "7b/7bb2f476-132d-41b8-aa07-ba029823e243", "d": "2026-11-08", "g": "narrow", "note": null, "fav": false}, {"id": "3566259192", "t": "Bartisch mit passenden Hochstühlen / Einzelkauf auch möglich", "p": 400, "vb": true, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3566259192", "pc": "16548", "a": "Glienicke/Nordbahn", "km": 13, "L": 130, "W": 80, "H": 105, "v": 25, "n": false, "st": true, "dl": false, "im": "57/574e0463-a438-4fa7-9833-f5dc16d5e6b9", "d": "2026-11-09", "g": "wide", "note": null, "fav": false}, {"id": "3566837966", "t": "Vicco Bartisch-Set Noel, Schwarz, 120 x 60cm mit 2 Barhockern", "p": 89, "vb": false, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3566837966", "pc": "14473", "a": "Potsdam", "km": 27, "L": 120, "W": 60, "H": 106, "v": 27, "n": true, "st": true, "dl": false, "im": "21/217abceb-c13f-4d89-aa77-bea547ab6204", "d": "2026-11-09", "g": "narrow", "note": null, "fav": false}, {"id": "3565613227", "t": "Bartisch, Theke, Kücheninsel TORNVIKEN Ikea", "p": 125, "vb": false, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3565613227", "pc": "14612", "a": "Falkensee", "km": 21, "L": 126, "W": 77, "H": 90, "v": 107, "n": false, "st": true, "dl": false, "im": "e3/e34649ec-a7de-4267-af74-516268617ed8", "d": "2026-11-09", "g": "island", "note": null, "fav": false}, {"id": "3563846176", "t": "Bartisch Akazienholz", "p": 70, "vb": false, "free": false, "u": "https://www.kleinanzeigen.de/s-anzeige/3563846176", "pc": "12487", "a": "Treptow", "km": 13, "L": 120, "W": 58, "H": 107, "v": 1, "n": false, "st": false, "dl": false, "im": "cd/cdec2e50-4195-4e74-80ec-3fdd5e5d0e7f", "d": "2026-11-07", "g": "narrow", "note": null, "fav": false}];
+const BANDS = [
+  ["close", "Closest to 120 × 70", "115–130 cm long, 65–75 cm deep."],
+  ["narrow", "Narrower", "55–64 cm deep. The same length, but less room for plates opposite each other."],
+  ["wide", "Deeper", "76–85 cm deep."],
+  ["length", "Shorter or longer", "65–75 cm deep, but under 115 or over 130 cm long."],
+  ["island", "Kitchen islands", "Counter height with shelves or cupboards underneath, e.g. IKEA TORNVIKEN, STENSTORP, VADHOLMA."],
+];
+const IMG = "https://img.kleinanzeigen.de/api/v1/prod-ads/images/";
+const photo = (im) => `<img src="${IMG}${im}?rule=$_35.AUTO" srcset="${IMG}${im}?rule=$_35.AUTO 230w, ${IMG}${im}?rule=$_58.AUTO 489w" sizes="(max-width: 480px) 46vw, 260px" alt="" loading="lazy" decoding="async">`;
+const S = { q: "", height: "all", fresh: false, set: false, nodealer: false, noisland: false, sort: "fit", price: "any" };
+const $ = (s) => document.querySelector(s);
+const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const MON = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+const fmtDate = (d) => { if (!d) return ""; const [y, m, dd] = d.split("-"); return `${+dd} ${MON[+m - 1]}${y !== "2026" ? " " + y : ""}`; };
+const fit = (i) => Math.abs(i.L - 120) + Math.abs(i.W - 70) + (i.H ? 0 : 3) - (i.fav ? 100 : 0);
+const hband = (i) => !i.H ? "?" : i.H >= 99 ? "bar" : "counter";
+
+function card(i) {
+  const flags = [];
+  if (i.fav) flags.push(`<span class="fav">Your pick</span>`);
+  if (i.n) flags.push(`<span class="new">New</span>`);
+  if (i.free) flags.push(`<span class="free">Free</span>`);
+  const price = i.free ? `<span class="price free">Free</span>` : i.p != null ? `<span class="price">€${i.p}</span>${i.vb ? '<span class="vb">VB</span>' : ""}` : `<span class="price ask">Make an offer</span>`;
+  const tags = [];
+  const hb = hband(i);
+  tags.push(`<span class="tag">${hb === "bar" ? "Bar height" : hb === "counter" ? "Counter height" : "Height not stated"}</span>`);
+  if (i.st) tags.push(`<span class="tag">+ chairs/stools</span>`);
+  if (i.dl) tags.push(`<span class="tag dealer">Dealer</span>`);
+  const where = [i.a, i.km != null ? `${i.km} km` : "", fmtDate(i.d)].filter(Boolean).join(" · ");
+  return `<li class="card${i.fav ? " fav" : ""}">
+    <a class="ph" href="${i.u}" target="_blank" rel="noopener" aria-label="${esc(i.t)}">${i.im ? photo(i.im) : '<span class="none">no photo</span>'}${flags.length ? `<span class="flag">${flags.join("")}</span>` : ""}</a>
+    <div class="cb">
+      <div class="pr">${price}<span class="views">${i.v != null ? i.v + " views" : ""}</span></div>
+      <div class="size">${i.L} × ${i.W} × <span class="h">${i.H ?? "?"}</span> cm</div>
+      <a class="title" href="${i.u}" target="_blank" rel="noopener">${esc(i.t)}</a>
+      <div class="meta"><span class="pc">${esc(i.pc)}</span> ${esc(where)}</div>
+      <div class="tags">${tags.join("")}</div>
+      ${i.note ? `<p class="note">${esc(i.note)}</p>` : ""}
+    </div>
+  </li>`;
+}
+
+function pass(i) {
+  if (S.q && !(i.t + " " + i.a).toLowerCase().includes(S.q)) return false;
+  if (S.height !== "all" && hband(i) !== S.height) return false;
+  if (S.fresh && !i.n) return false;
+  if (S.set && !i.st) return false;
+  if (S.nodealer && i.dl) return false;
+  if (S.noisland && i.g === "island") return false;
+  if (S.price !== "any" && !(i.free || (i.p != null && i.p <= +S.price))) return false;
+  return true;
+}
+const ORDER = {
+  fit: (a, b) => fit(a) - fit(b) || (a.p ?? 999) - (b.p ?? 999),
+  asc: (a, b) => (a.free ? 0 : a.p ?? 9999) - (b.free ? 0 : b.p ?? 9999),
+  views: (a, b) => (b.v ?? 0) - (a.v ?? 0),
+  new: (a, b) => +b.id - +a.id,
+};
+
+function render() {
+  const shown = D.filter(pass);
+  $("#bands").innerHTML = BANDS.map(([k, name, sub]) => {
+    const items = shown.filter((i) => i.g === k).sort(ORDER[S.sort]);
+    if (!items.length) return "";
+    return `<section class="band" aria-label="${name}"><h2>${name}<span class="n">${items.length}</span></h2><p class="sub">${sub}</p><ul class="grid">${items.map(card).join("")}</ul></section>`;
+  }).join("");
+  $("#count").textContent = `${shown.length} of ${D.length} tables`;
+  $("#empty").hidden = shown.length > 0;
+}
+
+function stats() {
+  const by = (k) => D.filter((i) => i.g === k).length;
+  const prices = D.filter((i) => i.p != null).map((i) => i.p).sort((a, b) => a - b);
+  const med = prices.length ? prices[Math.floor(prices.length / 2)] : null;
+  $("#stats").innerHTML = [
+    `<li><b>${D.length}</b> tables</li>`,
+    `<li><b>${by("close")}</b> closest to 120 × 70</li>`,
+    `<li><b>${D.filter((i) => i.n).length}</b> new since 9 Nov</li>`,
+    med != null ? `<li>median <b>€${med}</b></li>` : "",
+  ].join("");
+}
+
+$("#q").addEventListener("input", (e) => { S.q = e.target.value.trim().toLowerCase(); render(); });
+document.querySelectorAll("#height .chip").forEach((b) => b.addEventListener("click", () => {
+  S.height = b.dataset.v;
+  document.querySelectorAll("#height .chip").forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+  render();
+}));
+[["#f-new", "fresh"], ["#f-set", "set"], ["#f-nodealer", "nodealer"], ["#f-noisland", "noisland"]].forEach(([id, k]) => {
+  $(id).addEventListener("click", (e) => { S[k] = !S[k]; e.currentTarget.setAttribute("aria-pressed", String(S[k])); render(); });
+});
+[["#sort", "sort"], ["#price", "price"]].forEach(([id, k]) => $(id).addEventListener("change", (e) => { S[k] = e.target.value; render(); }));
+$("#reset").addEventListener("click", () => {
+  Object.assign(S, { q: "", height: "all", fresh: false, set: false, nodealer: false, noisland: false, price: "any" });
+  $("#q").value = ""; $("#price").value = "any";
+  document.querySelectorAll("#height .chip").forEach((x) => x.setAttribute("aria-pressed", String(x.dataset.v === "all")));
+  ["#f-new", "#f-set", "#f-nodealer", "#f-noisland"].forEach((id) => $(id).setAttribute("aria-pressed", "false"));
+  render();
+});
+stats();
+render();
+</script>
+</body>
+</html>
