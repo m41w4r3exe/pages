@@ -1,24 +1,45 @@
 #!/usr/bin/env bash
 # publish.sh — put one HTML page on the public site and wait until it is live.
 #
-#   bash publish.sh <page.html> <slug>   ->  https://m41w4r3exe.github.io/pages/<slug>/
+#   bash publish.sh <page.html> <slug> [--password]
+#     ->  https://m41w4r3exe.github.io/pages/<slug>/
 #
 # Accepts a full HTML document or a claude.ai artifact fragment (no doctype/head):
 # a fragment gets a doctype, utf-8 charset and viewport tag. Every page gets
 # <meta name="robots" content="noindex"> so search engines skip it.
 # Re-publishing the same slug replaces the page; the link stays the same.
+#
+# --password encrypts the page with StatiCrypt (AES-256, decrypted in the
+# visitor's browser) before it is committed, so the public repo only holds
+# ciphertext and a password prompt. The password comes from $STATICRYPT_PASSWORD,
+# or from a prompt when run in a terminal. All encrypted pages share the salt in
+# .staticrypt.json, so "Remember me" on one page also opens every other page
+# published with the same password. Use it for anything not meant for the whole
+# internet: company numbers, private lists. The ciphertext is public, so a short
+# password can be guessed offline; prefer 14+ characters.
 set -euo pipefail
 
-src=${1:?usage: publish.sh <page.html> <slug>}
-slug=${2:?usage: publish.sh <page.html> <slug>}
+usage="usage: publish.sh <page.html> <slug> [--password]"
+src=${1:?$usage}
+slug=${2:?$usage}
+encrypt=0
+case ${3-} in
+  "") ;;
+  --password) encrypt=1 ;;
+  *) echo "$usage" >&2; exit 2 ;;
+esac
 [[ $slug =~ ^[a-z0-9][a-z0-9-]*$ ]] || { echo "slug may only hold a-z, 0-9 and -" >&2; exit 2; }
 [[ -f $src ]] || { echo "no such file: $src" >&2; exit 2; }
 
 repo=m41w4r3exe/pages
 here=$(cd "$(dirname "$0")" && pwd)
+tmp=$(mktemp -d)
+trap 'rm -rf "$tmp"' EXIT
 mkdir -p "$here/$slug"
 
-python3 -I - "$src" "$here/$slug/index.html" <<'PY'
+# normalize <in> <out>: complete a fragment into a document and add noindex.
+normalize() {
+  python3 -I - "$1" "$2" <<'PY'
 import re, sys
 s = open(sys.argv[1], encoding="utf-8").read()
 robots = '<meta name="robots" content="noindex">'
@@ -30,9 +51,45 @@ elif 'name="robots"' not in s:
     s = re.sub(r"(<head[^>]*>)", r"\1\n" + robots, s, count=1, flags=re.I)
 open(sys.argv[2], "w", encoding="utf-8").write(s)
 PY
+}
+
+normalize "$src" "$tmp/index.html"
+
+if (( encrypt )); then
+  if [[ -z ${STATICRYPT_PASSWORD-} ]]; then
+    [[ -t 0 ]] || { echo "--password needs STATICRYPT_PASSWORD set, or a terminal to ask in" >&2; exit 2; }
+    read -rsp "Password for $slug: " STATICRYPT_PASSWORD
+    echo
+    [[ -n $STATICRYPT_PASSWORD ]] || { echo "empty password" >&2; exit 2; }
+  fi
+  (( ${#STATICRYPT_PASSWORD} >= 14 )) ||
+    echo "note: the password is under 14 characters; the encrypted file is public, so it can be guessed offline" >&2
+
+  # StatiCrypt reads its paths relative to the working directory (it prefixes
+  # "./"), so it runs inside $tmp with a copy of the shared salt file.
+  salt_args=()
+  if [[ -f $here/.staticrypt.json ]]; then
+    cp "$here/.staticrypt.json" "$tmp/.staticrypt.json"
+  else
+    salt_args=(-s "$(openssl rand -hex 16)")
+  fi
+  title=$(python3 -I -c '
+import html, re, sys
+m = re.search(r"<title[^>]*>(.*?)</title>", open(sys.argv[1], encoding="utf-8").read(), re.S | re.I)
+print(html.unescape(m.group(1)).strip() if m else "Protected page")' "$tmp/index.html")
+
+  (cd "$tmp" && STATICRYPT_PASSWORD=$STATICRYPT_PASSWORD npx --yes staticrypt@3.5.4 index.html \
+    -d enc -c .staticrypt.json ${salt_args[@]+"${salt_args[@]}"} --short --remember 30 \
+    --template-title "$title" --template-color-primary "#c8613f" --template-color-secondary "#faf9f5" >/dev/null)
+  cp "$tmp/.staticrypt.json" "$here/.staticrypt.json"
+  normalize "$tmp/enc/index.html" "$here/$slug/index.html"
+else
+  cp "$tmp/index.html" "$here/$slug/index.html"
+fi
 
 cd "$here"
 git add "$slug/index.html"
+if (( encrypt )); then git add .staticrypt.json; fi
 if git diff --cached --quiet; then
   echo "unchanged: $slug"
 else
