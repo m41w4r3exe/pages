@@ -22,3 +22,7 @@ prompt. Without `STATICRYPT_PASSWORD` the script asks for the password in the
 terminal. All encrypted pages share the salt in `.staticrypt.json`, so "Remember me"
 on one page opens the others that use the same password. The ciphertext is public,
 so use 14+ characters.
+
+Encrypting a page that was public before does not remove its old versions from
+the git history (the script warns). An encrypted page is never republished without
+`--password` (the script refuses). Encrypted pages show the title "Protected page".

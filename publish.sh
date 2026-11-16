@@ -14,7 +14,10 @@
 # ciphertext and a password prompt. The password comes from $STATICRYPT_PASSWORD,
 # or from a prompt when run in a terminal. All encrypted pages share the salt in
 # .staticrypt.json, so "Remember me" on one page also opens every other page
-# published with the same password. Use it for anything not meant for the whole
+# published with the same password. Encrypted pages get the generic title
+# "Protected page". Earlier unencrypted versions of a slug stay in the public
+# git history (the script warns), and an encrypted slug is never republished
+# without --password (the script refuses). Use it for anything not meant for the whole
 # internet: company numbers, private lists. The ciphertext is public, so a short
 # password can be guessed offline; prefer 14+ characters.
 set -euo pipefail
@@ -55,6 +58,26 @@ PY
 
 normalize "$src" "$tmp/index.html"
 
+# Encrypted files carry StatiCrypt's config object; plain pages never do.
+# (No `| grep -q`: grep would quit at the first match, git show would die of
+# SIGPIPE, and pipefail would turn that into "not encrypted".)
+is_encrypted() {
+  local s
+  s=$(git -C "$here" show "$1:$slug/index.html" 2>/dev/null) || return 1
+  [[ $s == *staticryptConfig* ]]
+}
+if (( encrypt )); then
+  plain=""
+  for c in $(git -C "$here" log --format=%h -- "$slug/index.html"); do
+    is_encrypted "$c" || plain+=" $c"
+  done
+  [[ -z $plain ]] ||
+    echo "warning: earlier unencrypted versions of $slug stay readable in the public git history:$plain" >&2
+elif is_encrypted HEAD; then
+  echo "$slug is password-protected; pass --password to update it (refusing to publish it unencrypted)" >&2
+  exit 2
+fi
+
 if (( encrypt )); then
   if [[ -z ${STATICRYPT_PASSWORD-} ]]; then
     [[ -t 0 ]] || { echo "--password needs STATICRYPT_PASSWORD set, or a terminal to ask in" >&2; exit 2; }
@@ -73,14 +96,10 @@ if (( encrypt )); then
   else
     salt_args=(-s "$(openssl rand -hex 16)")
   fi
-  title=$(python3 -I -c '
-import html, re, sys
-m = re.search(r"<title[^>]*>(.*?)</title>", open(sys.argv[1], encoding="utf-8").read(), re.S | re.I)
-print(html.unescape(m.group(1)).strip() if m else "Protected page")' "$tmp/index.html")
 
   (cd "$tmp" && STATICRYPT_PASSWORD=$STATICRYPT_PASSWORD npx --yes staticrypt@3.5.4 index.html \
     -d enc -c .staticrypt.json ${salt_args[@]+"${salt_args[@]}"} --short --remember 30 \
-    --template-title "$title" --template-color-primary "#c8613f" --template-color-secondary "#faf9f5" >/dev/null)
+    --template-title "Protected page" --template-color-primary "#c8613f" --template-color-secondary "#faf9f5" >/dev/null)
   cp "$tmp/.staticrypt.json" "$here/.staticrypt.json"
   normalize "$tmp/enc/index.html" "$here/$slug/index.html"
 else
