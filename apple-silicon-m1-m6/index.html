@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Apple Silicon compared</title>
+<style>
+:root {
+  --bg: #f6f6f3;
+  --surface: #ffffff;
+  --text: #1c1c1e;
+  --muted: #6b6b70;
+  --line: #e3e3de;
+  --bar: #d9d9d3;
+  --accent: #2f6fde;
+  --base: #5f6b7a;  --base-bg: #eef0f3;
+  --pro: #1f6fd1;   --pro-bg: #e5effb;
+  --max: #7b3fc4;   --max-bg: #f0e8fa;
+  --ultra: #a8620a; --ultra-bg: #fbf0e0;
+  --shadow: 0 1px 2px rgba(0,0,0,.05), 0 2px 8px rgba(0,0,0,.04);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #121214; --surface: #1c1c1f; --text: #ececef; --muted: #9a9aa2;
+    --line: #2d2d32; --bar: #3a3a40; --accent: #6ea1ff;
+    --base: #a9b4c2; --base-bg: #262a30;
+    --pro: #7fb0ff;  --pro-bg: #1c2a40;
+    --max: #c49bf5;  --max-bg: #2c2140;
+    --ultra: #f0b25a; --ultra-bg: #3a2a14;
+    --shadow: none;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #121214; --surface: #1c1c1f; --text: #ececef; --muted: #9a9aa2;
+  --line: #2d2d32; --bar: #3a3a40; --accent: #6ea1ff;
+  --base: #a9b4c2; --base-bg: #262a30;
+  --pro: #7fb0ff;  --pro-bg: #1c2a40;
+  --max: #c49bf5;  --max-bg: #2c2140;
+  --ultra: #f0b25a; --ultra-bg: #3a2a14;
+  --shadow: none;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font: 15px/1.5 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+}
+main { max-width: 1100px; margin: 0 auto; padding: 28px 16px 56px; }
+h1 { font-size: 26px; line-height: 1.2; margin: 0 0 6px; letter-spacing: -.01em; }
+h2 { font-size: 18px; margin: 36px 0 10px; }
+p { margin: 0 0 10px; }
+.lede { color: var(--muted); max-width: 62ch; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; box-shadow: var(--shadow); }
+
+.controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 18px 0 10px; }
+.chip-btn {
+  border: 1px solid var(--line); background: var(--surface); color: var(--text);
+  padding: 6px 12px; border-radius: 999px; font: inherit; font-size: 14px; cursor: pointer;
+}
+.chip-btn[aria-pressed="true"] { background: var(--text); color: var(--bg); border-color: var(--text); }
+.hint { color: var(--muted); font-size: 13px; margin-left: auto; }
+
+.table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+table { border-collapse: collapse; width: 100%; min-width: 640px; font-variant-numeric: tabular-nums; }
+th, td { padding: 9px 9px; text-align: left; border-bottom: 1px solid var(--line); white-space: nowrap; }
+thead th {
+  font-size: 12px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted);
+  font-weight: 600; position: sticky; top: 0; background: var(--surface); cursor: pointer; user-select: none;
+}
+thead th[aria-sort="ascending"]::after { content: " ▲"; font-size: 9px; }
+thead th[aria-sort="descending"]::after { content: " ▼"; font-size: 9px; }
+tbody tr:last-child td { border-bottom: 0; }
+td.num, th.num { text-align: right; }
+td:first-child, th:first-child { position: sticky; left: 0; background: var(--surface); z-index: 1; }
+.chip-name { font-weight: 600; }
+.tag {
+  display: inline-block; font-size: 11px; font-weight: 600; padding: 1px 7px; border-radius: 999px;
+  margin-left: 6px; vertical-align: 1px;
+}
+.t-Base { color: var(--base); background: var(--base-bg); }
+.t-Pro { color: var(--pro); background: var(--pro-bg); }
+.t-Max { color: var(--max); background: var(--max-bg); }
+.t-Ultra { color: var(--ultra); background: var(--ultra-bg); }
+.sub { color: var(--muted); font-size: 12px; }
+.score { display: inline-flex; align-items: center; gap: 8px; justify-content: flex-end; }
+.score .v { min-width: 3.2em; text-align: right; font-weight: 600; }
+.bar { width: 44px; height: 6px; background: var(--line); border-radius: 3px; overflow: hidden; }
+.bar i { display: block; height: 100%; border-radius: 3px; }
+.f-Base { background: var(--base); } .f-Pro { background: var(--pro); }
+.f-Max { background: var(--max); } .f-Ultra { background: var(--ultra); }
+.na { color: var(--muted); }
+.yr { display: block; color: var(--muted); font-size: 12px; font-weight: 400; }
+@media (max-width: 640px) {
+  .bar { display: none; }
+  .hint { margin-left: 0; width: 100%; }
+  h1 { font-size: 23px; }
+}
+
+.notes { margin: 12px 0 0; padding-left: 18px; color: var(--muted); font-size: 13.5px; }
+.notes li { margin-bottom: 4px; }
+
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+.use { padding: 14px 16px; }
+.use h3 { margin: 0 0 4px; font-size: 15px; }
+.use p { color: var(--muted); font-size: 14px; margin: 0; }
+.use .pick { color: var(--text); font-weight: 600; margin-top: 8px; }
+
+.eq { padding: 14px 16px; }
+.eq ul { margin: 0; padding-left: 18px; }
+.eq li { margin: 3px 0; }
+
+.prices table { min-width: 560px; }
+footer { margin-top: 36px; color: var(--muted); font-size: 12.5px; }
+footer a { color: var(--accent); word-break: break-all; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Apple Silicon, M1 to M6</h1>
+  <p class="lede">Every Mac chip in one table. The three scores compare each chip with the plain M1 from 2020: <b>2.0×</b> means twice as fast as an M1. Tap a column to sort.</p>
+
+  <div class="controls" role="group" aria-label="Filter by tier">
+    <button class="chip-btn" data-tier="All" aria-pressed="true">All</button>
+    <button class="chip-btn" data-tier="Base" aria-pressed="false">Base</button>
+    <button class="chip-btn" data-tier="Pro" aria-pressed="false">Pro</button>
+    <button class="chip-btn" data-tier="Max" aria-pressed="false">Max</button>
+    <button class="chip-btn" data-tier="Ultra" aria-pressed="false">Ultra (desktop)</button>
+    <span class="hint">Scroll sideways on a phone →</span>
+  </div>
+
+  <div class="card table-wrap">
+    <table id="chips">
+      <thead>
+        <tr>
+          <th data-key="order" aria-sort="ascending">Chip</th>
+          <th data-key="mc" class="num">Multi-core</th>
+          <th data-key="gx" class="num">Graphics</th>
+          <th data-key="sc" class="num">Single-core</th>
+          <th data-key="cpu" class="num">CPU cores</th>
+          <th data-key="gpu" class="num">GPU cores</th>
+          <th data-key="bw" class="num">Memory speed</th>
+          <th data-key="ram" class="num">Max RAM</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  <ul class="notes">
+    <li><b>Single-core</b> = how snappy everyday apps feel. <b>Multi-core</b> = heavy work like exporting, compiling, rendering. <b>Graphics</b> = games, 3D, video effects, local AI. <b>Memory speed</b> matters most for video and AI models.</li>
+    <li>Scores are for each chip's top version. Cheaper versions with fewer cores score lower (for example the 14-core M3 Max or the 15-core M5 Pro).</li>
+    <li>Ultra chips are only in the Mac Studio, not in laptops. There is no M4 Ultra, and Apple made no M6 Pro or M6 Max. Reports say the next Pro/Max chips are the M7 Pro/Max in 2027.</li>
+    <li>M5 Ultra: no independent scores yet. Apple says about 1.3× the M3 Ultra on CPU and 1.4× on graphics.</li>
+  </ul>
+
+  <h2>A new base chip often matches an older Pro</h2>
+  <div class="card eq">
+    <ul>
+      <li><b>M4</b> ≈ <b>M1 Pro</b> on CPU, but less graphics power.</li>
+      <li><b>M5</b> ≈ <b>M2 Pro / M3 Pro</b> on CPU.</li>
+      <li><b>M6</b> beats the <b>M3 Pro</b> on CPU and graphics.</li>
+      <li><b>M4 Pro</b> ≈ <b>M3 Max</b> on CPU, but the M3 Max has much more graphics power.</li>
+      <li><b>M5 Pro</b> beats the <b>M4 Max</b> on CPU.</li>
+    </ul>
+  </div>
+
+  <h2>Which one fits</h2>
+  <div class="grid">
+    <div class="card use">
+      <h3>Web, office, study, video calls</h3>
+      <p>Any chip in the table is enough. Get 16 GB of RAM or more: here RAM matters more than the chip.</p>
+      <p class="pick">Any base chip, or a cheap used M1 Pro</p>
+    </div>
+    <div class="card use">
+      <h3>Coding, photo editing, light video</h3>
+      <p>A Pro chip, or a newer base chip (M4, M5, M6), which matches an older Pro on CPU.</p>
+      <p class="pick">M1 Pro – M4 Pro, or M5 / M6</p>
+    </div>
+    <div class="card use">
+      <h3>Heavy video, 3D, games, local AI</h3>
+      <p>A Max chip. Graphics power, RAM and memory speed matter most here.</p>
+      <p class="pick">M3 Max or newer</p>
+    </div>
+  </div>
+
+  <h2>Typical prices in Germany (November 2026)</h2>
+  <div class="card table-wrap prices">
+    <table>
+      <thead>
+        <tr><th>Laptop</th><th>Condition</th><th class="num">Price</th><th class="num">Multi-core</th><th class="num">Graphics</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>16" MacBook Pro M1 Pro, 32 GB</td><td>used</td><td class="num">about 850 – 1,200 €</td><td class="num">1.6×</td><td class="num">2.3×</td></tr>
+        <tr><td>14" MacBook Pro M3 Max, 36 GB / 1 TB</td><td>used</td><td class="num">from about 1,850 €</td><td class="num">2.9×</td><td class="num">5.9×</td></tr>
+        <tr><td>14" MacBook Pro M6, 24 GB / 1 TB</td><td>new</td><td class="num">about 2,170 €</td><td class="num">2.6×</td><td class="num">3.1×</td></tr>
+        <tr><td>14" MacBook Pro M4 Max, 36 GB / 1 TB</td><td>used</td><td class="num">from about 2,300 €</td><td class="num">3.4×</td><td class="num">7.3×</td></tr>
+        <tr><td>14" MacBook Pro M5 Pro 15-core, 24 GB / 1 TB</td><td>new</td><td class="num">about 2,370 €</td><td class="num">below 3.9×</td><td class="num">below 4.8×</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <ul class="notes">
+    <li>Used prices are Kleinanzeigen asking prices; new prices are German retailers. Prices move every week, so check again before buying.</li>
+    <li>A used M3 Max gives the most power per euro here. A new M6 comes with a warranty and the longest macOS support.</li>
+  </ul>
+
+  <footer>
+    <p>Scores: Geekbench Browser averages for each chip's top version, as listed on one chart, so the ratios between chips are fair. Raw scores from other sites may use another Geekbench version, so compare the × values, not raw numbers. Apple's own claims fit the chart: Apple says the M5 Pro/Max are up to 2.5× faster multithreaded and 2.2× faster in graphics than the M1 Pro/Max.</p>
+    <p>Sources:<br>
+      <a href="https://scottpreston.com/articles/general/m1-to-m4-the-apple-silicon-performance-ladder/">https://scottpreston.com/articles/general/m1-to-m4-the-apple-silicon-performance-ladder/</a><br>
+      <a href="https://www.apple.com/newsroom/2026/03/apple-debuts-m5-pro-and-m5-max-to-supercharge-the-most-demanding-pro-workflows/">https://www.apple.com/newsroom/2026/03/apple-debuts-m5-pro-and-m5-max-to-supercharge-the-most-demanding-pro-workflows/</a><br>
+      <a href="https://www.apple.com/newsroom/2026/08/apple-introduces-m6-and-m5-ultra-for-a-big-leap-in-performance-and-ai-compute/">https://www.apple.com/newsroom/2026/08/apple-introduces-m6-and-m5-ultra-for-a-big-leap-in-performance-and-ai-compute/</a><br>
+      <a href="https://techcrunch.com/2026/10/27/apple-unveils-new-14-inch-macbook-pro-with-m6-chip/">https://techcrunch.com/2026/10/27/apple-unveils-new-14-inch-macbook-pro-with-m6-chip/</a>
+    </p>
+  </footer>
+</main>
+
+<script>
+(function () {
+  // Raw Geekbench Browser averages (top configuration per chip). Index = score / M1 score.
+  var M1 = { sc: 2191, mc: 8557, gx: 28433 };
+  var chips = [
+    ["M1", "Base", 2020, 8, 8, 68, 16, 2191, 8557, 28433],
+    ["M1 Pro", "Pro", 2021, 10, 16, 200, 32, 2199, 13902, 65590],
+    ["M1 Max", "Max", 2021, 10, 32, 400, 64, 2230, 14338, 108898],
+    ["M1 Ultra", "Ultra", 2022, 20, 64, 800, 128, 2220, 23607, 148010],
+    ["M2", "Base", 2022, 8, 10, 100, 24, 2400, 9757, 43697],
+    ["M2 Pro", "Pro", 2023, 12, 19, 200, 32, 2432, 16630, 82968],
+    ["M2 Max", "Max", 2023, 12, 38, 400, 96, 2554, 17359, 145103],
+    ["M2 Ultra", "Ultra", 2023, 24, 76, 800, 192, 2583, 28749, 221104],
+    ["M3", "Base", 2023, 8, 10, 100, 24, 2768, 11685, 48092],
+    ["M3 Pro", "Pro", 2023, 12, 18, 150, 36, 2820, 16945, 76998],
+    ["M3 Max", "Max", 2023, 16, 40, 400, 128, 2828, 24723, 167281],
+    ["M3 Ultra", "Ultra", 2025, 32, 80, 819, 512, 2920, 39107, 248342],
+    ["M4", "Base", 2024, 10, 10, 120, 32, 3277, 15474, 54242],
+    ["M4 Pro", "Pro", 2024, 14, 20, 273, 64, 3368, 24822, 115548],
+    ["M4 Max", "Max", 2024, 16, 40, 546, 128, 3496, 29106, 207460],
+    ["M5", "Base", 2025, 10, 10, 153, 32, 3646, 17957, 72718],
+    ["M5 Pro", "Pro", 2026, 18, 20, 307, 64, 3691, 33572, 137202],
+    ["M5 Max", "Max", 2026, 18, 40, 614, 128, 3725, 35039, 240333],
+    ["M5 Ultra", "Ultra", 2026, 36, 80, 1200, 512, null, null, null],
+    ["M6", "Base", 2026, 12, 12, 170, 32, 4002, 21883, 89325]
+  ].map(function (r, i) {
+    return {
+      order: i, name: r[0], tier: r[1], year: r[2], cpu: r[3], gpu: r[4], bw: r[5], ram: r[6],
+      sc: r[7] == null ? null : r[7] / M1.sc,
+      mc: r[8] == null ? null : r[8] / M1.mc,
+      gx: r[9] == null ? null : r[9] / M1.gx
+    };
+  });
+  var maxOf = {};
+  ["sc", "mc", "gx"].forEach(function (k) {
+    maxOf[k] = Math.max.apply(null, chips.map(function (c) { return c[k] || 0; }));
+  });
+
+  var tbody = document.querySelector("#chips tbody");
+  var state = { key: "order", dir: 1, tier: "All" };
+
+  function scoreCell(c, k) {
+    if (c[k] == null) return '<td class="num na">n/a</td>';
+    var pct = Math.round(c[k] / maxOf[k] * 100);
+    return '<td class="num"><span class="score"><span class="bar"><i class="f-' + c.tier +
+      '" style="width:' + pct + '%"></i></span><span class="v">' + c[k].toFixed(1) + '×</span></span></td>';
+  }
+  function bw(v) { return v >= 1000 ? (v / 1000).toFixed(1) + " TB/s" : v + " GB/s"; }
+
+  function render() {
+    var rows = chips.filter(function (c) { return state.tier === "All" || c.tier === state.tier; });
+    rows.sort(function (a, b) {
+      var x = a[state.key], y = b[state.key];
+      if (x == null && y == null) return 0;
+      if (x == null) return 1;
+      if (y == null) return -1;
+      return (x < y ? -1 : x > y ? 1 : a.order - b.order) * state.dir;
+    });
+    tbody.innerHTML = rows.map(function (c) {
+      return "<tr>" +
+        '<td><span class="chip-name">' + c.name + '</span><span class="tag t-' + c.tier + '">' + c.tier +
+          '</span><span class="yr">' + c.year + (c.tier === "Ultra" ? " · Mac Studio only" : "") + "</span></td>" +
+        scoreCell(c, "mc") + scoreCell(c, "gx") + scoreCell(c, "sc") +
+        '<td class="num">' + c.cpu + "</td>" +
+        '<td class="num">' + c.gpu + "</td>" +
+        '<td class="num">' + bw(c.bw) + "</td>" +
+        '<td class="num">' + c.ram + " GB</td>" +
+        "</tr>";
+    }).join("");
+    document.querySelectorAll("#chips thead th").forEach(function (th) {
+      th.setAttribute("aria-sort", th.dataset.key === state.key ? (state.dir === 1 ? "ascending" : "descending") : "none");
+    });
+  }
+
+  document.querySelectorAll("#chips thead th").forEach(function (th) {
+    th.addEventListener("click", function () {
+      var k = th.dataset.key;
+      if (state.key === k) state.dir = -state.dir;
+      else { state.key = k; state.dir = k === "order" ? 1 : -1; }
+      render();
+    });
+  });
+  document.querySelectorAll(".chip-btn").forEach(function (b) {
+    b.addEventListener("click", function () {
+      state.tier = b.dataset.tier;
+      document.querySelectorAll(".chip-btn").forEach(function (o) { o.setAttribute("aria-pressed", o === b ? "true" : "false"); });
+      render();
+    });
+  });
+  render();
+})();
+</script>
+</body>
+</html>
